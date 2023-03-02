@@ -101,23 +101,23 @@ Ants model(random):
 
 Phase 1
 
-![image-20230301205231868](.\Ant Phase 1.png)
+![image-20230301205231868](./Ant Phase 1.png)
 
 Phase 2
 
-![image-20230301204935406](.\Ant Phase 2.png)
+![image-20230301204935406](./Ant Phase 2.png)
 
 Phase 3
 
-![image-20230301205328622](F:\Study\Introduction to Complexity\Chapter 1\Ant Phase 3.png)
+![image-20230301205328622](./Ant Phase 3.png)
 
 Phase 4
 
-![image-20230301205406275](F:\Study\Introduction to Complexity\Chapter 1\Ant Phase 4.png)
+![image-20230301205406275](./Ant Phase 4.png)
 
 Phase 5
 
-![image-20230301205432454](F:\Study\Introduction to Complexity\Chapter 1\Ant Phase 5.png)
+![image-20230301205432454](./Ant Phase 5.png)
 
 
 
