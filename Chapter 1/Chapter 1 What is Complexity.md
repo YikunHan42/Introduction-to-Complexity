@@ -121,6 +121,284 @@ Phase 5
 
 
 
+Download [AntsNew.nlogo](https://complexityexplorer.s3.amazonaws.com/IntroToComplexity/Unit1/AntsNew_v_6.1.1.nlogo)
+
+
+
+Exercise: 
+
++ use the materials
++ set population to 200, and diffusion rate to 20
+  1. evaporation-rate = 0
+  2. evaporation-rate = 5
+  3. evaporation-rate = 20
+
+
+
+0
+
+![image-20230302154137600](./6.png)
+
+5
+
+![image-20230302154342636](./7.png)
+
+
+
+20
+
+![image-20230302154524715](./8.png)
+
+
+
+The average time when evaporation-rate = 5 is the fastest
+
+
+
+## 1.8 Our First Netlogo Model(Optional Introduction to NetLogo programming)
+
+Download [Ant1.nlogo](https://complexityexplorer.s3.amazonaws.com/IntroToComplexity/Unit1/Ant1_v_6.1.1.nlogo)
+
+
+
+agents are called turtles
+
+setup button
+
+```netlogo
+to setup
+  clear-all
+  reset-ticks
+  create-turtles 1
+  ask turtles
+  [
+    set shape "bug"
+    set size 3
+    set color red
+  ]
+end
+```
+
+go button
+
+```netlogo
+to go
+  ask turtles
+  [
+    right 30
+    forward 4
+  ]
+  tick
+end
+```
+
+start
+
+![1](./1.gif)
+
+setup infinitively -> in the center, but towards a different place
+
+
+
+boring?
+
+```netlogo
+to go
+  ask turtles
+  [
+    right random 30
+    forward random 4
+  ]
+  tick
+end
+```
+
+
+
+also, go through the wall
+
+![2](./2.gif)
+
+
+
+not random?
+
+`report` returns a value
+
+add comments by `;`
+
+```netlogo
+to go
+  ask turtles
+  [
+    ifelse coin-flip? [right random 60] [left random 60] ; if coin-flip? is true, turn right else turn left
+    forward random 4
+  ]
+  tick
+end
+
+to-report coin-flip?
+  report random 2 = 0 ; returns true or false at random
+end
+```
+
+![3](./3.gif)
+
+
+
+## 1.9 Our Second NetLogo Model(Optional Introduction to NetLogo programming, part 2)
+
+Download [Ant2.nlogo](https://complexityexplorer.s3.amazonaws.com/IntroToComplexity/Unit1/Ant2_v_6.1.1.nlogo)
+
+
+
+patches
+
+grow food
+
+```netlogo
+to grow-food
+  ask patches [set pcolor green] ; grass
+end
+```
+
+
+
+eat
+
+```netlogo
+to go
+  ask turtles
+  [
+    ifelse coin-flip? [right random 60][left random 60]  ; if coin-flip? is true, turn right else turn left
+    forward random 4
+    if pcolor = green ; if the turtle is located on a green patch
+    [
+      set pcolor black
+      set food-eaten (food-eaten + 1)
+      set label food-eaten
+    ]
+  ]
+  tick
+end
+```
+
+
+
+turtle stomach(don't digest in this model)
+
+```netlogo
+turtles-own [food-eaten]
+```
+
+
+
+start out as 0
+
+```netlogo
+to setup
+  clear-all
+  reset-ticks
+  create-turtles 1
+  ask turtles
+  [
+    set shape "bug"
+    set size 3
+    set color red
+    set food-eaten 0
+  ]
+  grow-food
+end
+```
+
+
+
+one ant situation(size 1 actually)
+
+![4](./4.gif)
+
+
+
+slider usage
+
+population
+
+```netlogo
+to setup
+  clear-all
+  reset-ticks
+  create-turtles population
+  ask turtles
+  [
+    set shape "bug"
+    set size 1
+    set color red
+    set food-eaten 0
+  ]
+  grow-food
+end
+```
+
+
+
+plot usage
+
+total food eaten-time
+
+Pen update commands: `plot sum [food-eaten] of turtles`
+
+
+
+step size and turn angle
+
+```netlogo
+to go
+  if not any? patches with [pcolor = green] [stop]
+  ask turtles
+  [
+    ifelse coin-flip? [right random max-turn-angle][left random max-turn-angle]  ; if coin-flip? is true, turn right else turn left
+    forward random max-step-size
+    if pcolor = green ; if the turtle is located on a green patch
+    [
+      set pcolor black
+      set food-eaten (food-eaten + 1)
+      set label food-eaten
+    ]
+  ]
+  tick
+end
+```
+
+
+
+multiple ones(80, 5, 120)
+
+![5](./5.gif)
+
+
+
+stop exactly
+
+```netlogo
+to go
+  if not any? patches with [pcolor = green] [stop]
+  ask turtles
+  [
+    ifelse coin-flip? [right random 60][left random 60]  ; if coin-flip? is true, turn right else turn left
+    forward random 4
+    if pcolor = green ; if the turtle is located on a green patch
+    [
+      set pcolor black
+      set food-eaten (food-eaten + 1)
+      set label food-eaten
+    ]
+  ]
+  tick
+end
+```
+
+
+
 ## References
 
 - [1] [Measurement of Complexity a non--exhaustive list](https://web.mit.edu/esd.83/www/notebook/Complexity.PDF)
