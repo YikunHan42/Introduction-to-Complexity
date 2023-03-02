@@ -101,7 +101,7 @@ Ants model(random):
 
 Phase 1
 
-![image-20230301205231868](./Ant Phase 1.png)
+![image-20230301205231868](./1.png)
 
 Phase 2
 
