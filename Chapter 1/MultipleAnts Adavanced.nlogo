@@ -1,4 +1,6 @@
-turtles-own [food-eaten]
+turtles-own [food-eaten return-to-nest?]
+
+patches-own [nest? pheromone]
 
 to setup
   clear-all
@@ -7,31 +9,64 @@ to setup
 
   ask turtles
   [
+    set return-to-nest? false ; flag
     set shape "bug"
-    set size 2
+    set size 1
     set color red
     set food-eaten 0
   ]
   grow-food
+  set-up-patches
+end
+
+to set-up-patches
+  ask patches[
+    set pheromone 0
+    set nest? (distancexy 0 0) < 2
+    if nest? [set pcolor orange]
+  ]
 end
 
 to go
   if not any? patches with [pcolor = green] [stop]
   ask turtles
-  [
-    ifelse coin-flip? [right random max-turn-angle][left random max-turn-angle]  ; if coin-flip? is true, turn right else turn left
+  [ ifelse return-to-nest? = false
+    [look-for-food]
+    [return-to-nest]
+  ]
+  evaporate-pheromone
+  tick
+end
+
+to return-to-nest
+  face patch 0 0 fd 1
+  set pheromone pheromone + 1
+  set plabel pheromone
+  if pcolor = orange
+  [set return-to-nest? false]
+end
+
+to look-for-food
+  let pheromone-ahead? scent-at-angle 0
+  let pheromone-right? scent-at-angle 45
+  let pheromone-left? scent-at-angle 45 ; selected range
+
+  ifelse (pheromone-right? > pheromone-ahead? or pheromone-left? > pheromone-ahead?)
+  [ifelse pheromone-right? > pheromone-left?
+    [rt 45]
+    [lt 45]]
+
+    [if pheromone-ahead? = 0
+    [ifelse coin-flip? [right random max-turn-angle][left random max-turn-angle]]  ; if coin-flip? is true, turn right else turn left
     forward random max-step-size
     if pcolor = green ; if the turtle is located on a green patch
     [
       set pcolor black
       set food-eaten (food-eaten + 1)
       set label food-eaten
+      set return-to-nest? true
     ]
-    if (food-eaten > 2) [set color blue]
-
   ]
-
-  tick
 end
 
 to-report coin-flip?     ; returns true or false at random
@@ -51,6 +86,24 @@ to grow-food
   [ set pcolor green ]
   ]
 end
+
+to evaporate-pheromone
+  let x random-float 1
+  ask patches with [pheromone > 0]
+  [if x < probability-to-evaporate
+    [set pheromone pheromone - 1]
+    set plabel pheromone]
+end
+; to, similar to def
+
+to-report scent-at-angle [angle]
+  let p patch-right-and-ahead angle 1
+  if p = nobody [report 0]
+  report [pheromone] of p
+end
+; usage: find the required signle patch that is the given distance from this turtle
+; to-report, return numerical data, similar to int, float, double, etc.
+; [pheromone] of p is similar to p.pheromone
 @#$#@#$#@
 GRAPHICS-WINDOW
 210
@@ -132,17 +185,17 @@ population
 population
 1
 200
-50.0
+200.0
 1
 1
 NIL
 HORIZONTAL
 
 PLOT
--1
-229
-209
-418
+0
+268
+210
+457
 Total Food Eaten
 Time
 Total Food Eaten
@@ -180,8 +233,23 @@ max-turn-angle
 max-turn-angle
 1
 180
-120.0
+60.0
 1
+1
+NIL
+HORIZONTAL
+
+SLIDER
+12
+227
+185
+260
+probability-to-evaporate
+probability-to-evaporate
+0
+1
+0.1
+.01
 1
 NIL
 HORIZONTAL
