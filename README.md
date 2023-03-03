@@ -45,18 +45,18 @@ Register for [Origins of Life](http://origins.complexityexplorer.org/) for a com
 
 ## Resources
 
-|  Chapter  |                Slides                 |                        Note                         |                 Homework                  |                 Solution                  |
-| :-------: | :-----------------------------------: | :-------------------------------------------------: | :---------------------------------------: | :---------------------------------------: |
-| Chapter1  | [Slides](./Chapter 1/Unit1Slides.pdf) | [Note](./Chapter 1/Chapter 1 What Is Complexity.md) | [Homework](./Chapter 1/Unit1Homework.pdf) | [Solution](./Chapter 1/Unit1 Homework.md) |
-| Chapter2  |                                       |                                                     |                                           |                                           |
-| Chapter3  |                                       |                                                     |                                           |                                           |
-| Chapter4  |                                       |                                                     |                                           |                                           |
-| Chapter5  |                                       |                                                     |                                           |                                           |
-| Chapter6  |                                       |                                                     |                                           |                                           |
-| Chapter7  |                                       |                                                     |                                           |                                           |
-| Chapter8  |                                       |                                                     |                                           |                                           |
-| Chapter9  |                                       |                                                     |                                           |                                           |
-| Chapter10 |                                       |                                                     |                                           |                                           |
+|  Chapter  |                            Slides                            |                             Note                             |                           Homework                           |                           Solution                           |
+| :-------: | :----------------------------------------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: |
+| Chapter1  | [Slides](https://github.com/YikunHan42/Introduction-to-Complexity/blob/main/Chapter%201/Unit1Slides.pdf) | [Note](https://github.com/YikunHan42/Introduction-to-Complexity/blob/main/Chapter%201/Chapter%201%20What%20is%20Complexity.md) | [Homework](https://github.com/YikunHan42/Introduction-to-Complexity/blob/main/Chapter%201/Unit1Homework.pdf) | [Solution](https://github.com/YikunHan42/Introduction-to-Complexity/blob/main/Chapter%201/Unit%201%20Homework.md) |
+| Chapter2  |                                                              |                                                              |                                                              |                                                              |
+| Chapter3  |                                                              |                                                              |                                                              |                                                              |
+| Chapter4  |                                                              |                                                              |                                                              |                                                              |
+| Chapter5  |                                                              |                                                              |                                                              |                                                              |
+| Chapter6  |                                                              |                                                              |                                                              |                                                              |
+| Chapter7  |                                                              |                                                              |                                                              |                                                              |
+| Chapter8  |                                                              |                                                              |                                                              |                                                              |
+| Chapter9  |                                                              |                                                              |                                                              |                                                              |
+| Chapter10 |                                                              |                                                              |                                                              |                                                              |
 
 
 
