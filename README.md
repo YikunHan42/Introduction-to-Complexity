@@ -31,10 +31,6 @@ Register for [Origins of Life](http://origins.complexityexplorer.org/) for a com
 ## Syllabus
 
 1. What is Complexity?
-   + [Slides](https://github.com/YikunHan42/Introduction-to-Complexity/blob/main/Chapter%201/Unit1Slides.pdf)  
-   + [Note](./Chapter 1/Chapter 1 What is Complexity.md) 
-   + [Homework](./Chapter 1/Unit1Homework.pdf) 
-   + [Solution](./Chapter 1/Unit1 Homework.md)
 2. Dynamics and Chaos
 3. Fractals
 4. Information, Order, and Randomness
@@ -44,3 +40,23 @@ Register for [Origins of Life](http://origins.complexityexplorer.org/) for a com
 8. Models of Cooperation in Social Systems
 9. Networks
 10. Scaling in Biology and Society
+
+
+
+## Resources
+
+|  Chapter  |                Slides                 |                        Note                         |                 Homework                  |                 Solution                  |
+| :-------: | :-----------------------------------: | :-------------------------------------------------: | :---------------------------------------: | :---------------------------------------: |
+| Chapter1  | [Slides](./Chapter 1/Unit1Slides.pdf) | [Note](./Chapter 1/Chapter 1 What Is Complexity.md) | [Homework](./Chapter 1/Unit1Homework.pdf) | [Solution](./Chapter 1/Unit1 Homework.md) |
+| Chapter2  |                                       |                                                     |                                           |                                           |
+| Chapter3  |                                       |                                                     |                                           |                                           |
+| Chapter4  |                                       |                                                     |                                           |                                           |
+| Chapter5  |                                       |                                                     |                                           |                                           |
+| Chapter6  |                                       |                                                     |                                           |                                           |
+| Chapter7  |                                       |                                                     |                                           |                                           |
+| Chapter8  |                                       |                                                     |                                           |                                           |
+| Chapter9  |                                       |                                                     |                                           |                                           |
+| Chapter10 |                                       |                                                     |                                           |                                           |
+
+
+
