@@ -31,9 +31,9 @@ Register for [Origins of Life](http://origins.complexityexplorer.org/) for a com
 ## Syllabus
 
 1. What is Complexity?
-   + [Slides](./Chapter 1/Unit1Slides.pdf)  
+   + [Slides](https://github.com/YikunHan42/Introduction-to-Complexity/blob/main/Chapter%201/Unit1Slides.pdf)  
    + [Note](./Chapter 1/Chapter 1 What is Complexity.md) 
-   + [Homework](/.Chapter 1/Unit1Homework.pdf) 
+   + [Homework](./Chapter 1/Unit1Homework.pdf) 
    + [Solution](./Chapter 1/Unit1 Homework.md)
 2. Dynamics and Chaos
 3. Fractals
