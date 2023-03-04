@@ -61,9 +61,7 @@ an example is population growth
 
 
 set n as the population, which follows an exponential function
-$$
-n_{t}=birthrate^t
-$$
+$$ n_{t}=birthrate^t $$
 linear system(no interactions among bunnies)
 $$
 n_{t+1}=birthrate*n_t
