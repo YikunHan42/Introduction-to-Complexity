@@ -122,7 +122,7 @@ $x^t \in (0,1)$ maps to a new value $x_{t+1} \in (0,1)$
 
 Example:
 
-set $R=2$ and $x_0=0.2$, then$x_6 \approx 0.5$ and $x_7 \approx 0.5$
+set $R=2$ and $x_0=0.2$, then $x_6 \approx 0.5$ and $x_7 \approx 0.5$
 
 0.5 is called **attractor**
 
