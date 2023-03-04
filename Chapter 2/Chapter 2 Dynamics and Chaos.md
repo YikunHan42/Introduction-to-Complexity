@@ -63,9 +63,7 @@ an example is population growth
 set n as the population, which follows an exponential function
 $$n_{t}=birthrate^t$$
 linear system(no interactions among bunnies)
-$$
-n_{t+1}=birthrate*n_t
-$$
+$$n_{t+1}=birthrate*n_t$$
 
 
 Question 1: n4 = 81
@@ -87,9 +85,7 @@ example: 10 different runs of the initial population at 1 = an initial populatio
 a number of bunnies die due to overcrowding -> nonlinear interaction
 
 Logistic Model(By Verhulst)
-$$
-n_{t+1}=(birthrate-deathrate)*[n_t-\frac{n_t^2}{maxpopulation}]
-$$
+$$n_{t+1}=(birthrate-deathrate)*[n_t-\frac{n_t^2}{maxpopulation}]$$
 number will be rounded off(real number)
 
 
@@ -119,9 +115,7 @@ Exercise 3: Yes
 Logistic Model:
 
 set $k$ as max-population, $x_t=\frac{n_t}{k}$, then we can get the logistic map
-$$
-x_{t+1}=R[x_t-x_t^2]
-$$
+$$x_{t+1}=R[x_t-x_t^2]$$
 $x^t \in (0,1)$ maps to a new value $x_{t+1} \in (0,1)$
 
 
@@ -136,7 +130,7 @@ Since $n_0$ can change, 0.5 is called **fixed point attractor**
 
 
 
-dynamic sense: $(x_{t-1}, x_t) -> $(x_t, x_{t+1}) will always move to/stay on the left, and move towards the center
+dynamic sense: $(x_{t-1}, x_t) -> (x_t, x_{t+1})$ will always move to/stay on the left, and move towards the center
 
 ![image-20230304204312221](./1.png)
 
