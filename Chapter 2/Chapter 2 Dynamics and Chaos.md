@@ -104,7 +104,51 @@ why not reach capacity? $(25-625/50)*2=25$
 
 
 
-whole is different from sum of the parts
+whole is different from the sum of the parts
+
+
+
+Exercise 1: 30
+
+Exercise 2: Same
+
+Exercise 3: Yes
+
+
+
+## 2.5 Logistic Map
+
+Logistic Model:
+
+set $k$ as max-population, $x_t=\frac{n_t}{k}$, then we can get the logistic map
+$$
+x_{t+1}=R[x_t-x_t^2]
+$$
+$x^t \in (0,1)$ maps to a new value $x_{t+1} \in (0,1)$
+
+
+
+Example:
+
+set $R=2$ and $x_0=0.2$, then$x_6 \approx 0.5$ and $x_7 \approx 0.5$
+
+0.5 is called **attractor**
+
+Since $n_0$ can change, 0.5 is called **fixed point attractor**
+
+
+
+dynamic sense: $(x_{t-1}, x_t} -> $(x_t, x_{t+1}) will always move to/stay on the left, and move towards the center
+
+![image-20230304204312221](./1.png)
+
+
+
+Quiz: 0.6
+
+
+
+
 
 ## References
 
