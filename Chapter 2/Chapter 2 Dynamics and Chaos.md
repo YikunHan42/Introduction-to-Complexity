@@ -61,7 +61,7 @@ an example is population growth
 
 
 set n as the population, which follows an exponential function
-$$ n_{t}=birthrate^t $$
+$$n_{t}=birthrate^t$$
 linear system(no interactions among bunnies)
 $$
 n_{t+1}=birthrate*n_t
@@ -136,7 +136,7 @@ Since $n_0$ can change, 0.5 is called **fixed point attractor**
 
 
 
-dynamic sense: $(x_{t-1}, x_t} -> $(x_t, x_{t+1}) will always move to/stay on the left, and move towards the center
+dynamic sense: $(x_{t-1}, x_t) -> $(x_t, x_{t+1}) will always move to/stay on the left, and move towards the center
 
 ![image-20230304204312221](./1.png)
 
