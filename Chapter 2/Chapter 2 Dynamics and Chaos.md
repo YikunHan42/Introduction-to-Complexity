@@ -140,9 +140,125 @@ Quiz: 0.6
 
 
 
+## 2.6 Period Doubling Routes to Chaos
 
+Download [LogisticMap.nlogo](https://complexityexplorer.s3.amazonaws.com/IntroToComplexity/Unit2/LogisticMap_v_6.1.1.nlogo)
+
+Sample
+
+![3](./3.gif)
+
+$R$ determines the ultimate dynamics of the system
+
+
+
+changing $R$ -> time it takes to settle down varies
+
+
+
+when $R$ continuously rises, you can find an oscillation between 2 different values
+
+
+
+periodic attractor of period 2
+
+**state**:$(x_t, x_{t+1})$(a point on the graph)
+
+![4](./4.gif)
+
+
+
+4 values(only doubles)
+
+![5](./5.gif)
+
+
+
+chaos(quite random, doesn't settle down)
+
+![6](./6.gif)
+
+
+
+Download [SensitiveDependence.nlogo](https://complexityexplorer.s3.amazonaws.com/IntroToComplexity/Unit2/SensitiveDependence_v_6.1.1.nlogo)
+
+chaos means sensitive dependence on initial conditions
+
+
+
+even if we start out with very similar initial conditions, the behavior of these two different systems will look very different after some number of time steps
+
+![7](./7.gif)
+
+
+
+if we don't know about those decimal places, then prediction becomes impossible [2] [3]
+
+
+
+$X$ as an attractor and corresponding $R$, only $2^n$ periods
+
+when $R$ is above 3.55, the dynamics stop being periodic and become chaotic, this value of $R$ is called the onset of chaos
+
+![image-20230313210748703](./2.png)
+
+
+
+## Universality in Chaos
+
+Download [SineMap.nlogo](http://complexityexplorer.s3.amazonaws.com/IntroToComplexity/Unit2/SineMap_v_6.1.1.nlogo)
+
+
+
+Chaos: Seemingly random behavior with *sensitive dependence on initial conditions*
+
+
+
+Logistic Map: A simple, completely deterministic equation that, when iterated, can display chaos(depending on the value of $R$)
+
+
+
+Deterministic Chaos: Perfect prediction, *a la* Laplace's deterministic "clockwork universe", is impossible, even in principle, if we're looking at a chaotic system
+
+
+
+appears with quantum mechanics
+
+
+
+![3](./3.png)
+
+
+
+the unimodal or one-humped maps
+
+
+
+Sine Map
+
+$$x_{t+1}=\frac{R}{4}sin(\pi x_t)$$
+
+set $\lambda=\frac{R}{4}$
+
+
+
+Feigenbaum's constant
+
+
+
+![image-20230313214611788](./4.png)
+
+
+
+universal properties(order in chaos):
+
++ periodic doubling route to chaos
+
++ follows Feigenbaum-Coullet-Tresser theory
 
 ## References
 
 - [1] [A philosophical essay on probabilities](https://bayes.wustl.edu/Manual/laplace_A_philosophical_essay_on_probabilities.pdf)
+- [2] [Chaos](http://astro1.panet.utoledo.edu/~khare/teaching/PHYS-1190-Fall-2006/chaos-class1.pdf)
+- [3] [Simple mathematical models with very complicated dynamics](https://www.researchgate.net/publication/237005499_Simple_Mathematical_Models_With_Very_Complicated_Dynamics/link/541814960cf2218008bf23d2/download)
 
