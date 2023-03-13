@@ -162,7 +162,7 @@ when $R$ continuously rises, you can find an oscillation between 2 different val
 
 periodic attractor of period 2
 
-**state**:$(x_t, x_{t+1})$(a point on the graph)
+**state**: $(x_t, x_{t+1})$ (a point on the graph)
 
 ![4](./4.gif)
 
