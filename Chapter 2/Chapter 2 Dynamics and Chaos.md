@@ -256,9 +256,44 @@ universal properties(order in chaos):
 
 + follows Feigenbaum-Coullet-Tresser theory
 
+
+
+## 2.8 Guest Spot: Liz Bradley, University of Colorado and SFI
+
+Optional readings:
+
+J. Garland and L. Bradley, [On the importance of nonlinear modeling in computer performance prediction](http://arxiv.org/abs/1305.4924)
+
+
+
+Q: An example of how you've used tools from nonlinear dynamics and chaos
+
+A: 
+
++ A computer is a nonlinear dynamical and chaotic system(a whole bunch of transistors and other kinds of things), there are electrons moving around through metal and silicon. It started about 10 years ago when the system got to be so complicated or complex.
++ Use linear time-invariant tools -> Not fully accepted(the system is not amenable to that kind of analysis, much more complicated)
++ Memory usage(for instance) is chaotic: sensitive to initial conditions(run the program twice and watch a time series of memory -> very different)
++ State Variable of a computer registers (browser + other stuff/application for watching lectures)
++ **Experimental data but no proof**: measured the [Lyapunov exponent](https://en.wikipedia.org/wiki/Lyapunov_exponent) and calculated from time series data, then due diligence
++ The cause of bifurcations is the code(application), maybe one program is periodic and another is chaotic(change is not smooth as changing $R$, maybe discrete?)
+
+
+
+Q: Exciting current directions for the field of dynamics(open questions)
+
+A: Understanding the formation and role of what is called the Lagrangian coherent structures[4]
+
++ A crowd at a railway station, some people will be arriving and some will be leaving, the result is chaos but there are structures
++ A shifting pattern of borders between groups of people and people with different goals, borders are called LCS
++ They are intangible, immaterial, and will be undetectable if the passengers stopped moving, but real enough to be treated mathematically
++ Sample: morning glory cloud
+
+
+
 ## References
 
 - [1] [A philosophical essay on probabilities](https://bayes.wustl.edu/Manual/laplace_A_philosophical_essay_on_probabilities.pdf)
 - [2] [Chaos](http://astro1.panet.utoledo.edu/~khare/teaching/PHYS-1190-Fall-2006/chaos-class1.pdf)
 - [3] [Simple mathematical models with very complicated dynamics](https://www.researchgate.net/publication/237005499_Simple_Mathematical_Models_With_Very_Complicated_Dynamics/link/541814960cf2218008bf23d2/download)
+- [4] [Lagrangian Coherent Structures](http://georgehaller.com/reprints/annurev-fluid-010313-141322.pdf)
 
