@@ -1,59 +1,137 @@
-breed [bunnies bunny]
-globals [last-count]
-
-Bunnies-own [old]
+globals [x-current x-new x-current' x-new' num-turtles-created turtlex0-who turtlex0'-who]
 
 to setup
-  ca
-  let one-patch (patch-set patch 0 0)
-  ask one-patch [sprout-bunnies initial-population [set old false set shape "bunny2" set color white set size 4 disperse]]
-end
+  ;; (for this model to work with NetLogo's new plotting features,
+  ;; __clear-all-and-reset-ticks should be replaced with clear-all at
+  ;; the beginning of your setup procedure and reset-ticks at the end
+  ;; of the procedure.)
+  __clear-all-and-reset-ticks
+  set num-turtles-created -1; first turtle created will be number 0
+  draw-axes
+  draw-parabola
 
-to reproduce
-  ifelse (count bunnies) = 0 [
-    print "No more bunnies!"
-  ]
+  set x-current x0
+  set x-new (R * x-current * (1 - x-current))  ; logistic map
+
+  create-turtles 1; this turtle will plot x_{t+1} vs x_t using initial condition x0
   [
-    ask bunnies [ set old true ]
-    set last-count count bunnies
-    ask one-of bunnies [ hatch-bunnies how-many-to-hatch  [ disperse ] ]  ;Ok, Not too realistic to have one bunny do all the reproductive work ... but easier to code.
-    ask bunnies with [old] [die]
-    do-plotting
+    set color blue
+    set xcor (x-current * max-pxcor)
+    set ycor (x-new * max-pycor)
+    set shape "dot"
+    set size 5
+  ]
+  set num-turtles-created num-turtles-created + 1
+  set turtlex0-who num-turtles-created   ; "id number" for this turtle
+
+  set x-current' x0'
+  set x-new' (R * x-current' * (1 - x-current'))  ; logistic map
+
+  create-turtles 1; this turtle will plot x_{t+1} vs x_t using initial condition x0'
+    [
+      set color red
+      set xcor (x-current' * max-pxcor)
+      set ycor (x-new' * max-pycor)
+      set shape "dot"
+      set size 3
+    ]
+  set num-turtles-created num-turtles-created + 1
+  set turtlex0'-who num-turtles-created  ; "id number" for this turtle
+end
+
+to go
+  iterate  ; do one iteration of logistic map
+;  update-plot
+  wait .1
+  tick  ; increase tick number by 1
+end
+
+to iterate
+  set x-current x-new
+  set x-new (R * x-current * (1 - x-current))  ; one iteration of logistic map
+  ask turtle turtlex0-who
+  [
+      set xcor (x-current * max-pxcor)  ; update coordinates for turtle representing first initial condition
+      set ycor (x-new * max-pycor)
+
+  ]
+  set x-current' x-new'
+  set x-new' (R * x-current' * (1 - x-current'))  ; one iteration of logistic map
+  ask turtle turtlex0'-who
+    [
+      set xcor (x-current' * max-pxcor)  ; update coordinates for turtle representing second initial condition
+      set ycor (x-new' * max-pycor)
+    ]
+end
+
+to draw-axes   ; draws x and y axes
+  ask patches
+    [set pcolor green]
+  create-turtles 1
+  set num-turtles-created num-turtles-created + 1
+  ask turtles
+  [
+    set color black
+    set xcor min-pxcor
+    set ycor min-pycor
+    set heading 0
+    pen-down
+    fd max-pycor   ; draw y axis
+    pen-up
+    set xcor min-pxcor
+    set ycor min-pycor
+    set heading 90
+    pen-down
+    fd max-pxcor  ; draw x axis
+    die
   ]
 end
 
-to-report how-many-to-hatch
-  report birthrate * count bunnies
+to draw-parabola  ; draws parabola representing logistic map for given value of R
+ let x 0
+ let y 0
+ create-turtles 1
+ set num-turtles-created num-turtles-created + 1
+  ask turtles
+  [
+    set color black
+    set xcor x * min-pxcor
+    set ycor y * min-pycor
+    pen-down
+  ]
+  repeat 10000
+  [
+    set x (x + .0001)
+    ask turtles
+    [
+      set xcor (x * max-pxcor)
+      set ycor (R * x * (1 - x)) * max-pycor
+    ]
+  ]
+  ask turtles [die]
 end
 
-to disperse
-  set size size * .98 set heading random 360
-  let new-x random max-pxcor
-  let new-y random max-pycor
-  let x-sign random 2
-  let y-sign random 2
-  ifelse (x-sign = 0) [set  xcor 0 - new-x] [set xcor new-x]
-  ifelse (y-sign = 0) [set ycor 0 - new-y] [set ycor new-y]
-  set old false
+;;plotting procedures -------------------
+
+to setup-plot
+  set-current-plot "logistic map"
+  set-plot-x-range  0 1
+  set-plot-y-range  0 1
 end
 
-to do-plotting
-  set-current-plot "Population vs. Time"
-  plot count bunnies
-
-  set-current-plot "This year's pop. vs. last year's pop."
-  plotxy last-count count bunnies
-
+to update-plot
+  set-current-plot-pen "x"
+  plot x-current
 end
 @#$#@#$#@
 GRAPHICS-WINDOW
-195
-10
-632
-448
+293
+45
+603
+356
 -1
 -1
-13.0
+9.152
 1
 10
 1
@@ -63,206 +141,378 @@ GRAPHICS-WINDOW
 0
 0
 1
--16
-16
--16
-16
+0
+32
+0
+32
 0
 0
 1
 ticks
 30.0
 
+BUTTON
+87
+256
+162
+295
+step
+go
+NIL
+1
+T
+OBSERVER
+NIL
+NIL
+NIL
+NIL
+1
+
+BUTTON
+13
+256
+88
+295
+NIL
+setup
+NIL
+1
+T
+OBSERVER
+NIL
+NIL
+NIL
+NIL
+1
+
+SLIDER
+11
+101
+223
+134
+R
+R
+0
+4
+3.9
+0.01
+1
+NIL
+HORIZONTAL
+
+SLIDER
+11
+137
+223
+170
+x0
+x0
+0
+1
+0.2
+0.00001
+1
+NIL
+HORIZONTAL
+
+PLOT
+24
+404
+606
+581
+Logistic map
+time t (* 10)
+x_t
+0.0
+5.0
+0.0
+1.0
+true
+true
+"" ""
+PENS
+"x{t}" 0.1 0 -13345367 true "" "plot x-current"
+"x'{t}" 0.1 0 -2674135 true "" "plot x-current'"
+
+MONITOR
+6
+329
+72
+374
+x{t}
+x-current
+4
+1
+11
+
+MONITOR
+71
+329
+137
+374
+x{t+1}
+x-new
+4
+1
+11
+
 TEXTBOX
-17
+257
+210
+300
+228
+x\n
+14
+0.0
+1
+
+TEXTBOX
+428
+382
+443
+400
+x
+14
+0.0
+1
+
+TEXTBOX
+264
+70
+292
+88
+1.0
+14
+0.0
+1
+
+TEXTBOX
+274
+362
+289
+380
+0
+14
+0.0
+1
+
+TEXTBOX
+300
+378
+315
+396
+0
+14
+0.0
+1
+
+TEXTBOX
+583
+383
+606
+401
+1.0
+14
+0.0
+1
+
+TEXTBOX
+12
 10
-205
-76
-Simple Population Growth
+340
+64
+Logistic Map: Sensitive Dependence on Initial Conditions
 18
 95.0
 1
 
-BUTTON
-12
-158
-117
-191
-Reproduce
-reproduce
-NIL
-1
-T
-OBSERVER
-NIL
-NIL
-NIL
-NIL
-1
-
-BUTTON
-12
-117
-78
-150
-Setup
-setup\n
-NIL
-1
-T
-OBSERVER
-NIL
-NIL
-NIL
-NIL
-1
-
-MONITOR
-46
-320
-148
-365
-NIL
-count bunnies
-17
-1
-11
-
-PLOT
-646
-14
-1005
-175
-Population vs. Time
-Time
-Population
-0.0
-10.0
-0.0
-10.0
-true
-false
-"" ""
-PENS
-"" 1.0 0 -16777216 true "" "plot count turtles"
-
-SLIDER
-11
-264
-183
-297
-birthrate
-birthrate
-0
-5
-2.0
-1
-1
-NIL
-HORIZONTAL
-
-PLOT
-648
-183
-1007
-343
-This year's pop. vs. last year's pop.
-Last year's pop.
-This year's pop. 
-0.0
-10.0
-0.0
-10.0
-true
-false
-"" ""
-PENS
-"default" 1.0 0 -16777216 false "" "plot count turtles"
-
 TEXTBOX
-7
-68
-230
-112
-n      = birthrate * n
-14
-0.0
-1
-
-SLIDER
-13
-214
-185
-247
-initial-population
-initial-population
-0
+373
 10
-1.0
+571
+66
+x     = R x  (1 - x  )
+16
+0.0
 1
-1
-NIL
-HORIZONTAL
 
 TEXTBOX
-16
-78
-40
-96
+385
+18
+410
+36
 t+1
 11
 0.0
 1
 
 TEXTBOX
-140
-76
-155
-94
+451
+18
+466
+36
 t
 11
 0.0
 1
 
+TEXTBOX
+506
+17
+521
+35
+t
+11
+0.0
+1
+
+TEXTBOX
+16
+67
+166
+87
+Set Parameters:
+16
+0.0
+1
+
+TEXTBOX
+14
+226
+180
+266
+Iterate logistic map:
+16
+0.0
+1
+
+TEXTBOX
+267
+218
+294
+236
+t+1
+11
+0.0
+1
+
+TEXTBOX
+440
+388
+455
+406
+t
+11
+0.0
+1
+
+BUTTON
+160
+256
+223
+295
+NIL
+go
+T
+1
+T
+OBSERVER
+NIL
+NIL
+NIL
+NIL
+1
+
+SLIDER
+11
+176
+223
+209
+x0'
+x0'
+0
+1
+0.20001
+.00001
+1
+NIL
+HORIZONTAL
+
+MONITOR
+144
+329
+209
+374
+x'{t}
+x-current'
+17
+1
+11
+
+MONITOR
+206
+329
+267
+374
+x'{t+1}
+x-new'
+17
+1
+11
+
+TEXTBOX
+46
+306
+99
+326
+First x
+16
+105.0
+1
+
+TEXTBOX
+168
+306
+240
+326
+Second x
+16
+15.0
+1
+
 @#$#@#$#@
 ## WHAT IS IT?
 
-This model illustrates population growth, without any limits to growth.  
+This model demonstrates sensitive dependence on initial conditions in the logistic map, x{t+1} = R x{t} (1 - x{t}).  This sensitive dependence is seen when R is in the chaotic regime. 
 
 ## HOW IT WORKS
 
-The model counts the number of rabbits at the end of each generation and then produces the correct number the following generation. To keep the math simple, there is no overlapping of generations–that is, all the rabbits from one year replace themselves with offspring (according to the growth rate seting) and then perish.
+This model is very similar to LogisticMap.nlogo.  The only difference is that there is a second time series (x{t}, x{t+1}), with its own initial condition.  We see the first time series in red, and the second in blue.  By setting R to be in the chaotic regime and the two initial conditions (x{0} and x'{0}) to be very close to each other (but not exactly equal), it can be seen how a very small difference in the initial condition can produce very large, and hard-to-predict differences in the behavior of the systems. 
 
 ## HOW TO USE IT
 
-To use the model, press “setup” and then “reproduce”. Each time you press “reproduce”, a generation of rabbits will be born.
-
+Use this model in the same way you used LogisticMap.nlogo, but in addition set the value of x'{0}.  
 
 ## CREDITS AND REFERENCES
 
-This model is part of the Dynamics series of the Complexity Explorer project.
+This model is part of the Dynamics series of the Complexity Explorer project.  
+ 
+Main Author:  Melanie Mitchell
 
-Main Author:  John Balwit
-
-Contributions from: Melanie Mitchell
-
+Contributions from:  John Balwit
 
 Netlogo:  Wilensky, U. (1999). NetLogo. http://ccl.northwestern.edu/netlogo/. Center for Connected Learning and Computer-Based Modeling, Northwestern University, Evanston, IL.
 
 
 ## HOW TO CITE
 
-If you use this model, please cite it as: "Simple Population Growth" model, Complexity Explorer project, http://complexityexplorer.org
+If you use this model, please cite it as: "Sensitive Dependence" model, Complexity Explorer project, http://complexityexplorer.org
 
 ## COPYRIGHT AND LICENSE
 
-Copyright 2013 Santa Fe Institute.
+Copyright 2013 Santa Fe Institute.  
 
 This model is licensed by the Creative Commons Attribution-NonCommercial-NoDerivs 3.0 License ( http://creativecommons.org/licenses/by-nc-nd/3.0/ ). This states that you may copy, distribute, and transmit the work under the condition that you give attribution to ComplexityExplorer.org, and your use is for non-commercial purposes.
-
-
-
-
 @#$#@#$#@
 default
 true
@@ -297,30 +547,6 @@ Circle -7500403 true true 110 127 80
 Circle -7500403 true true 110 75 80
 Line -7500403 true 150 100 80 30
 Line -7500403 true 150 100 220 30
-
-bunny2
-false
-0
-Polygon -7500403 true true 61 150 76 180 91 195 103 214 90 225 76 255 90 255 105 240 132 209 151 210 181 210 195 225 196 255 181 255 180 255 165 255 166 270 211 270 241 255 240 210 255 210 255 165 225 135 210 120 165 105 91 105
-Polygon -7500403 true true 90 164 109 104 85 82 60 89 34 104 19 149 34 164 52 162 74 153
-Polygon -7500403 true true 64 98 96 87 135 45 130 15 97 36 54 86
-Polygon -7500403 true true 34 89 42 47 60 15 90 15 55 88
-Circle -16777216 true false 37 103 16
-Line -16777216 false 44 150 104 150
-Line -16777216 false 39 158 84 175
-Line -16777216 false 29 159 57 195
-Polygon -5825686 true false 15 150 30 165 30 150
-Polygon -5825686 true false 76 90 97 47 130 32
-Line -16777216 false 180 210 165 180
-Line -16777216 false 165 180 180 165
-Line -16777216 false 180 165 225 165
-Line -16777216 false 180 210 195 225
-Circle -7500403 true true 15 60 88
-Rectangle -7500403 true true 180 150 225 180
-Circle -16777216 true false 30 90 30
-Circle -7500403 true true 234 144 42
-Circle -7500403 true true 120 15 30
-Circle -7500403 true true 60 0 30
 
 butterfly
 true
@@ -479,33 +705,6 @@ Polygon -7500403 true true 165 180 165 210 225 180 255 120 210 135
 Polygon -7500403 true true 135 105 90 60 45 45 75 105 135 135
 Polygon -7500403 true true 165 105 165 135 225 105 255 45 210 60
 Polygon -7500403 true true 135 90 120 45 150 15 180 45 165 90
-
-rabbit
-false
-0
-Polygon -7500403 true true 61 150 76 180 91 195 103 214 91 240 76 255 61 270 76 270 106 255 132 209 151 210 181 210 211 240 196 255 181 255 166 247 151 255 166 270 211 270 241 255 240 210 270 225 285 165 256 135 226 105 166 90 91 105
-Polygon -7500403 true true 75 164 94 104 70 82 45 89 19 104 4 149 19 164 37 162 59 153
-Polygon -7500403 true true 64 98 96 87 138 26 130 15 97 36 54 86
-Polygon -7500403 true true 49 89 57 47 78 4 89 20 70 88
-Circle -16777216 true false 37 103 16
-Line -16777216 false 44 150 104 150
-Line -16777216 false 39 158 84 175
-Line -16777216 false 29 159 57 195
-Polygon -5825686 true false 0 150 15 165 15 150
-Polygon -5825686 true false 76 90 97 47 130 32
-Line -16777216 false 180 210 165 180
-Line -16777216 false 165 180 180 165
-Line -16777216 false 180 165 225 165
-Line -16777216 false 180 210 210 240
-
-sheep
-false
-0
-Rectangle -7500403 true true 151 225 180 285
-Rectangle -7500403 true true 47 225 75 285
-Rectangle -7500403 true true 15 75 210 225
-Circle -7500403 true true 135 75 150
-Circle -16777216 true false 165 76 116
 
 square
 false
