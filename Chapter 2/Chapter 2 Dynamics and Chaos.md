@@ -290,6 +290,15 @@ A: Understanding the formation and role of what is called the Lagrangian coheren
 
 
 
+Q: Complex System
+
+A:
+
++ Setup: a system with lots of state variables and they're coupled(often nonlinearly, sometimes adaptively, the way they're coupled changes over time)
++ The behavior of such a thing only occupies a subset of the state place(bird flocking -> some dimension/information that's gone, which are packed together)
+
+
+
 ## References
 
 - [1] [A philosophical essay on probabilities](https://bayes.wustl.edu/Manual/laplace_A_philosophical_essay_on_probabilities.pdf)
